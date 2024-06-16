@@ -1,0 +1,18 @@
+service: email-sender
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    SENDGRID_API_KEY: ${env:SENDGRID_API_KEY}
+
+plugins:
+  - serverless-offline
+
+functions:
+  sendEmail:
+    handler: handler.sendEmail
+    events:
+      - http:
+          path: send-email
+          method: post
